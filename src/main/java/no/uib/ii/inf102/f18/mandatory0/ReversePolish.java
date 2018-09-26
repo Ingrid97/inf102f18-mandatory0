@@ -7,6 +7,8 @@ public class ReversePolish {
         Scanner scn = new Scanner(System.in);
 
         String[] stykke = scn.nextLine().split(" ");
+
+        //stacken vil aldri bli større en 5000. lager da bare arrayen/Stacken en gang.
         ingridStack svar = new ingridStack(5000);
 
         for(int i = 0; i < stykke.length; i++){
@@ -14,6 +16,7 @@ public class ReversePolish {
             if(stykke[i].equals("*") || stykke[i].equals("+") || stykke[i].equals("-") || stykke[i].equals("/")){
 
                 String holder = svar.popp();
+
                 String delString = "(" + svar.popp()  +  stykke[i]  + holder + ")";
                 svar.push(delString);
 
@@ -30,34 +33,19 @@ public class ReversePolish {
  * En stack laget av en array og en teller
  */
 
-class ingridStack{
-    public String[] liste;
-    int teller = 0;
+class ingridStack {
+    private String[] liste;
+    private int teller = 0;
 
-    public ingridStack(int n){
+    ingridStack(int n) {
         liste = new String[n];
     }
 
     String popp() {
-        if (teller == 0) {
-            return "Stacken er tom";
-        } else {
-            String ret = liste[teller-1];
-            teller--;
-            return ret;
-        }
-    }
-
-    String peek() {
-        if (teller == 0) {
-            return "Stacken er tom";
-        } else {
-            return liste[teller - 1];
-        }
+        return liste[--teller];
     }
 
     void push(String s) {
-        liste[teller] = s;
-        teller++;
+        liste[teller++] = s;
     }
 }
