@@ -18,11 +18,13 @@ public class FakeboolUnionFind {
             int users = Integer.parseInt(list[0]);
             int N = Integer.parseInt(list[1]);
 
+            // assign all users to point at there selvs
             uArray = new int[users];
             for (int i = 0; i < users; i++){
                 uArray[i] = i;
             }
 
+            //loops over to either print or union
             for (int i = 0; i < N; i++){
                 String[] s = scn.readLine().split(" ");
 
@@ -42,9 +44,12 @@ public class FakeboolUnionFind {
 
     public static int find(int f){
         int root = f;
+
+        // finds the root element
         while( root !=  uArray[root] )
             root =  uArray[root];
 
+        //uses compression to optimize the algorithm
         while(f != root) {
             int next =  uArray[f];
             uArray[f] = root;
@@ -56,6 +61,8 @@ public class FakeboolUnionFind {
     public static void union(int v, int w){
         int newV = find(v);
         int newW = find(w);
+
+        //the lowest value becomes the root
         if ( newV < newW){
             uArray[newW] = newV;
         } else {

@@ -20,6 +20,9 @@ public class FakeboolQuickFind {
     }
 }
 
+/**
+ * class for the quick find
+ */
 class ingridQuickFind{
 
     int[] quick;
@@ -31,6 +34,7 @@ class ingridQuickFind{
         }
     }
 
+    //connect two accounts
     public void connect(int a, int b){
 
         if (!isConnected(a, b)){
@@ -38,11 +42,13 @@ class ingridQuickFind{
             int q_a = quick[a];
             int q_b = quick[b];
 
+            //so the smalest becomes the root
             if (q_a > q_b){
                 int x = q_a;
                 q_a = q_b;
                 q_b = x;
             }
+
             for (int i = 0; i < quick.length; i++){
                 if (quick[i] == q_b){
                     quick[i] = q_a;

@@ -58,11 +58,6 @@ class expr{
     }
 }
 
-/**
- * ingridStack:
- * En stack laget av en array og en teller
- */
-
 class ingridStackHard {
     private expr[] liste;
     private int teller = 0;

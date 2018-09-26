@@ -10,6 +10,7 @@ public class SortableLinkedList<E extends Comparable<E>> implements ISortableLis
     }
 
     private Elem first;
+    private Elem last;
     private int size = 0;
 
     public SortableLinkedList(){
@@ -17,11 +18,18 @@ public class SortableLinkedList<E extends Comparable<E>> implements ISortableLis
     }
 
     public void add(E element) {
-       Elem newNext = new Elem();
-       newNext.el = element;
-       newNext.next = first;
-       first = newNext;
-       size++;
+        Elem newLast = new Elem();
+        newLast.el = element;
+
+        if (size == 0){
+            first = newLast;
+            last = newLast;
+        } else {
+            Elem secondLast = last;
+            last = newLast;
+            secondLast.next = newLast;
+        }
+        size++;
     }
 
     public void add(int index, E element) {
@@ -86,6 +94,7 @@ public class SortableLinkedList<E extends Comparable<E>> implements ISortableLis
     public int size() {
         return size;
     }
+
     public void sort() {
         first = mergeSort(first);
 
@@ -146,90 +155,6 @@ public class SortableLinkedList<E extends Comparable<E>> implements ISortableLis
         }
         return midlePointer;
     }
-
-/*
-    public void sort() {
-        first = mergeSort(first, size);
-
-    }
-
-    Elem mergeSort(Elem h, int length) {
-
-        //if the length is 0 or one
-        if (length == 0 || length == 1) {
-            return h;
-        }
-
-        //finds the midle element
-        Elem middle = getMiddle(h, length );
-        Elem middlenext = middle.next;
-
-        Elem left = mergeSort(h, length/2);
-        Elem right = mergeSort(middlenext, length-length/2);
-
-        Elem sortedlist = merge(left, right, length);
-        return sortedlist;
-    }
-
-    Elem merge(Elem a, Elem b, int length) {
-        Elem result = null;
-        int lenA = length/2;
-        int lenB = length-length/2;
-
-        // en runde for å finne head
-        if (lenA == 0){
-            return b;
-        } else if (lenB == 0){
-            return a;
-        }
-        else if ((a.el.compareTo(b.el)) <= 0){
-            result = a;
-            lenA--;
-            a = a.next;
-        } else {
-            result = b;
-            lenB--;
-            b = b.next;
-        }
-
-        Elem head = result;
-
-        for (int i = 0; i < length-1; i++) {
-            if (lenA == 0){
-                result.next = b;
-                b = b.next;
-                lenB--;
-            } else if (lenB == 0){
-                result.next = a;
-                a = a.next;
-                lenA--;
-            } else if ((a.el.compareTo(b.el)) <= 0){
-                lenA--;
-                result.next = a;
-                a = a.next;
-            } else {
-                lenB--;
-                result.next = b;
-                b = b.next;
-            }
-            result = result.next;
-        }
-        return head;
-    }
-
-    Elem getMiddle(Elem h, int length)
-    {
-        if (h == null)
-            return h;
-
-        Elem midle = first;
-
-        for (int i = 0; i < length/2; i++){
-            midle = midle.next;
-        }
-
-        return midle;
-    }*/
 
     public E[] toArray(E[] a) {
         int count = 0;
