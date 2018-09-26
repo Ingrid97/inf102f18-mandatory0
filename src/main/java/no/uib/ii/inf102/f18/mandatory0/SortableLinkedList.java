@@ -23,7 +23,7 @@ public class SortableLinkedList<E extends Comparable<E>> implements ISortableLis
 
         if (size == 0){
             first = newLast;
-            last = newLast;
+            last = newLast; 
         } else {
             Elem secondLast = last;
             last = newLast;
